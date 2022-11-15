@@ -1,11 +1,10 @@
-import express from "express";
-
+import express from 'express';
+import cors from 'cors';
+import usersRouter from './routes/users';
 const app = express();
 
-const port = 3000;
+app.use(cors());
+app.use('/', (req, res) => { res.send('Main Page') })
+app.use('/users', usersRouter)
 
-app.get("/", (req, res) => {
-  res.send("The !");
-});
-
-app.listen(port, () => console.log(`server is listening on ${port}`));
+export default app;
