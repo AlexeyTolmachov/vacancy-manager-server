@@ -7,8 +7,9 @@ app.use(cors());
 app.use('/', (req, res) => { res.send('Main Page') })
 app.use('/users', usersRouter)
 
-app.get("/", (req, res) => {
-  res.send("The Mother fucker !!!");
+app.use((req, res) => {
+  console.log("no routes match");
+  res.status(404).json({ message: "Not found" });
 });
 
 // app.use(async (err, req, res, next) => {
