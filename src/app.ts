@@ -1,12 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import usersRouter from './routes/users';
-import { IError } from './interfaces/error';
+import { IError } from './interfaces/interfaces';
+import { ctrlWrapper } from './middlewares/ctrl_wrapper';
+
 const app = express();
 
 app.use(cors());
 app.use('/home', (req, res) => { res.send('Main Page') });
-app.use('/users', usersRouter);
+app.use('/users', ctrlWrapper(usersRouter));
+// app.use('/users', (req, res) => { res.send('Users Page') });
 
 app.use((req, res) => {
   console.log("no routes match");
